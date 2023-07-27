@@ -31,14 +31,15 @@ const draw = SVG()
 // 2.2 gen svg shape
 // 2.3 gen svg text
 if (shape === 'circle') {
-  draw.circle(150).move(75, 25).fill(textColor);
+  shape = new Circle();
 } else if (shape === 'triangle') {
-  draw.polygon('75,175 150,25 225,175').fill(textColor);
+  shape = new Triangle();
 } else if (shape === 'square') {
-  draw.rect(150, 150).move(75, 25).fill(textColor);
-}
+  shape = new Square();
+} 
 
-draw.text(text).move(75, 100).font({ size: 30, fill: textColor });
+// set the shape's color
+shape.setColor(shapeColor);
 // 2.9 write the file
 const svgContent = draw.svg();
 return svgContent;
