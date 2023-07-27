@@ -1,6 +1,6 @@
 //0.0 the main cards are usually get things imported here
-//0. import packages; import the module from shape.js
 const { default: inquirer } = require("inquirer");
+//0. import packages; import the module from shape.js
 const shape = require("./lib/shapes.js");
 const Tiangle = shape.Triangle;
 const Circle = shape.Circle;
@@ -15,14 +15,32 @@ const { Triangle, Circle, Square } = require("./lib/shapes.js");
 
 
 //TODO: 
-
+// function to generate SVG
 function generateSVGLogo(text, textColor, shape, shapeColor)
 //1. create an array promp the user for shape, text, shape color and text color
 //2. create the SVG
 // 2.1 gen svg tag
+const draw = SVG()
+.size(300, 200)
+.rect(300, 200)
+.fill(shapeColor);
+
 // 2.2 gen svg shape
 // 2.3 gen svg text
+if (shape === 'circle') {
+  draw.circle(150).move(75, 25).fill(textColor);
+} else if (shape === 'triangle') {
+  draw.polygon('75,175 150,25 225,175').fill(textColor);
+} else if (shape === 'square') {
+  draw.rect(150, 150).move(75, 25).fill(textColor);
+}
+
+draw.text(text).move(75, 100).font({ size: 30 });
 // 2.9 write the file
+const svgContent = draw.svg();
+return svgContent;
+
+
 
 function prompUser() {
   inquirer
@@ -31,7 +49,7 @@ function prompUser() {
         type: "input",
         message: "Enter up to three characters for the logo text:",
         name: "text",
-        validate: (input) => input.length <= 3,
+        validate: (input) => input.length > 0 && input.length <= 3,
       },
       {
         type: "input",
@@ -79,16 +97,10 @@ const data =
   <rect x="60" y="10" rx="10" ry="10" width="30" height="30" stroke="black" fill="transparent" stroke-width="5"/>
 
   <circle cx="25" cy="75" r="20" stroke="red" fill="transparent" stroke-width="5"/>
-  <ellipse cx="75" cy="75" rx="20" ry="5" stroke="red" fill="transparent" stroke-width="5"/>
-
-  <line x1="10" x2="50" y1="110" y2="150" stroke="orange" stroke-width="5"/>
-  <polyline points="60 110 65 120 70 115 75 130 80 125 85 140 90 135 95 150 100 145"
-      stroke="orange" fill="transparent" stroke-width="5"/>
-
+ 
   <polygon points="50 160 55 180 70 180 60 190 65 205 50 195 35 205 40 190 30 180 45 180"
       stroke="green" fill="transparent" stroke-width="5"/>
 
-  <path d="M20,230 Q40,205 50,230 T90,230" fill="none" stroke="blue" stroke-width="5"/>
 </svg>`
 
 fs.writeToFile("examples/hw.svg", data, err => {
