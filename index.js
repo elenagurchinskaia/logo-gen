@@ -1,17 +1,20 @@
-//0.0 the main cards are usually get things imported here
+//0.0 create main cards to get things imported here
+const fs = require('fs');
 const { default: inquirer } = require("inquirer");
 //0. import packages; import the module from shape.js
 const shape = require("./lib/shapes.js");
-const Tiangle = shape.Triangle;
-const Circle = shape.Circle;
-const Square = shape.Square;
+const SVG = require('svg.js')
+const { Triangle, Circle, Square } = require("./lib/shapes.js");
+
+// const Tiangle = shape.Triangle;
+// const Circle = shape.Circle;
+// const Square = shape.Square;
 
 // Alterative (more common approach):
 // const {Trianle} = require ('./lib/shapes.js') // impoer one piece of the model object
 // const {Circle} = require ('./lib/shapes.js')
 // const {Square} = require ('./lib/shapes.js')
 
-const { Triangle, Circle, Square } = require("./lib/shapes.js");
 
 
 //TODO: 
@@ -35,14 +38,14 @@ if (shape === 'circle') {
   draw.rect(150, 150).move(75, 25).fill(textColor);
 }
 
-draw.text(text).move(75, 100).font({ size: 30 });
+draw.text(text).move(75, 100).font({ size: 30, fill: textColor });
 // 2.9 write the file
 const svgContent = draw.svg();
 return svgContent;
 
 
 
-function prompUser() {
+function promptUser() {
   inquirer
     .prompt([
       {
@@ -69,42 +72,50 @@ function prompUser() {
       },
     ])
     .then((answers) => {
-      generateSVGLogo(
+      const svgContent = generateSVGLogo(
         answers.text,
         answers.textColor,
         answers.shape,
         answers.shapeColor
       );
+
+      fs.writeFile("examples/hw.svg", svgContent, (err) => {
+        if (err) {
+          console.error('Error writing to file:', err);
+        } else {
+          console.log('Generatedlogo.svg');
+        }
+      });
     })
     .catch((error) => {
       console.log(error);
     });
-}
-
-prompUser();
-
-
-function createText(fillColor, text) {
-  // return string with fullColor and text ${}
-  const newShape = new Triangle()
-  newShape.render()
-}
-
-const data = 
-`<svg width="200" height="250" version="1.1" xmlns="http://www.w3.org/2000/svg">
-
-  <rect x="10" y="10" width="30" height="30" stroke="black" fill="transparent" stroke-width="5"/>
-  <rect x="60" y="10" rx="10" ry="10" width="30" height="30" stroke="black" fill="transparent" stroke-width="5"/>
-
-  <circle cx="25" cy="75" r="20" stroke="red" fill="transparent" stroke-width="5"/>
- 
-  <polygon points="50 160 55 180 70 180 60 190 65 205 50 195 35 205 40 190 30 180 45 180"
-      stroke="green" fill="transparent" stroke-width="5"/>
-
-</svg>`
-
-fs.writeToFile("examples/hw.svg", data, err => {
-  if(err) {
-    console.log(error)
   }
-})
+  promptUser();
+
+
+
+// function createText(fillColor, text) {
+//   // return string with fullColor and text ${}
+//   const newShape = new Triangle()
+//   newShape.render()
+// }
+
+// const data = 
+// `<svg width="200" height="250" version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+//   <rect x="10" y="10" width="30" height="30" stroke="black" fill="transparent" stroke-width="5"/>
+//   <rect x="60" y="10" rx="10" ry="10" width="30" height="30" stroke="black" fill="transparent" stroke-width="5"/>
+
+//   <circle cx="25" cy="75" r="20" stroke="red" fill="transparent" stroke-width="5"/>
+ 
+//   <polygon points="50 160 55 180 70 180 60 190 65 205 50 195 35 205 40 190 30 180 45 180"
+//       stroke="green" fill="transparent" stroke-width="5"/>
+
+// </svg>`
+
+// fs.writeToFile("examples/hw.svg", data, err => {
+//   if(err) {
+//     console.log(error)
+//   }
+// })
