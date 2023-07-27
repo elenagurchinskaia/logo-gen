@@ -36,7 +36,9 @@ if (shape === 'circle') {
   shape = new Triangle();
 } else if (shape === 'square') {
   shape = new Square();
-} 
+} else {
+  throw new Error('Invalid shape type');
+}
 
 // set the shape's color
 shape.setColor(shapeColor);
