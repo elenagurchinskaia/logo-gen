@@ -35,7 +35,12 @@ function generateSVGLogo(text, textColor, shapeType, shapeColor) {
   // set the shape's color
   shape.setColor(shapeColor);
 
-  let svgContent = `<svg width="300" height="200" version="1.1" xmlns="http://www.w3.org/2000/svg">${shape.render()}<text x="150" y="125" text-anchor="middle" font-size="74" fill="${textColor}">${text}</text></svg>`;
+  let svgContent = `<svg width="300" height="200" version="1.1" xmlns="http://www.w3.org/2000/svg">${shape.render()}<text x="150" y="125" text-anchor="middle" font-size="65" fill="${textColor}">${text}</text></svg>`;
+
+  `<svg polygon points="75,175 150,25 225,175"/><text x="150" y="145" text-anchor="middle" font-size="45" fill="${textColor}">${text}</text></svg>`;
+
+  `<svg <rect width="150" height="150"/><text x="150" y="125" text-anchor="middle" font-size="65" fill="${textColor}">${text}</text></svg>`;
+
   // 2.3 gen svg text
   // draw.text(text).move(75, 100).font({ size: 30, fill: textColor });
   // draw.add(shape.render());

@@ -1,1 +1,7 @@
-<svg width="300" height="200" version="1.1" xmlns="http://www.w3.org/2000/svg"><circle cx="150" cy="100" r="75" fill="black"/><text x="150" y="125" text-anchor="middle" font-size="74" fill="yellow">EG</text></svg>
+// circle <svg width="300" height="200" version="1.1" xmlns="http://www.w3.org/2000/svg"><circle cx="150" cy="100" r="75" fill="black"/><text x="150" y="125" text-anchor="middle" font-size="74" fill="yellow">EG</text></svg>
+
+// triangle <svg width="300" height="200" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<polygon points="75,175 150,25 225,175" fill="grey" />
+<text x="150" y="150" text-anchor="middle" font-size="45" fill="white">SVG</text></svg>
+
+// square
