@@ -3,7 +3,7 @@ const fs = require("fs");
 const inquirer = require("inquirer");
 //0. import packages; import the module from shape.js
 const shape = require("./lib/shapes.js");
-const SVG = require("svg.js");
+// const SVG = require("./node_modules/svg.js/dist/svg.js");
 const { Triangle, Circle, Square } = require("./lib/shapes.js");
 
 // const Tiangle = shape.Triangle;
@@ -19,7 +19,7 @@ function generateSVGLogo(text, textColor, shapeType, shapeColor) {
   //1. create an array promp the user for shape, text, shape color and text color
   //2. create the SVG
   // 2.1 gen svg tag
-  const draw = SVG().size(300, 200).rect(300, 200).fill(shapeColor);
+  // const draw = SVG().size(300, 200).rect(300, 200).fill(shapeColor);
   // 2.2 gen svg shape
   let shape;
   if (shapeType === "circle") {
@@ -35,11 +35,12 @@ function generateSVGLogo(text, textColor, shapeType, shapeColor) {
   // set the shape's color
   shape.setColor(shapeColor);
 
+  let svgContent = `<svg width="300" height="200" version="1.1" xmlns="http://www.w3.org/2000/svg">${shape.render()}<text x="150" y="125" text-anchor="middle" font-size="74" fill="${textColor}">${text}</text></svg>`;
   // 2.3 gen svg text
-  draw.text(text).move(75, 100).font({ size: 30, fill: textColor });
-  draw.add(shape.render());
+  // draw.text(text).move(75, 100).font({ size: 30, fill: textColor });
+  // draw.add(shape.render());
   // 2.9 return the SVG content as a string
-  const svgContent = draw.svg();
+  // const svgContent = draw.svg();
   return svgContent;
 }
 
@@ -77,7 +78,7 @@ function promptUser() {
         answers.shapeColor
       );
 
-      fs.writeFile("examples/hw.svg", `<svg>${svgContent}</svg>`, (err) => {
+      fs.writeFile("examples/hw.svg", svgContent, (err) => {
         if (err) {
           console.error("Error writing to file:", err);
         } else {
