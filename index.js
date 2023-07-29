@@ -1,7 +1,7 @@
-//0.0 create main cards to get things imported here
+//TODO:// ---------------------------    Create const for fs and inquirer   --------------------------- //
 const fs = require("fs");
 const inquirer = require("inquirer");
-//0. import packages; import the module from shape.js
+//TODO:// ---------------------------    Import packages from shape.js   --------------------------- //
 const shape = require("./lib/shapes.js");
 // const SVG = require("./node_modules/svg.js/dist/svg.js");
 const { Triangle, Circle, Square } = require("./lib/shapes.js");
@@ -14,7 +14,8 @@ const { Triangle, Circle, Square } = require("./lib/shapes.js");
 // const {Trianle} = require ('./lib/shapes.js') // impoer one piece of the model object
 // const {Circle} = require ('./lib/shapes.js')
 // const {Square} = require ('./lib/shapes.js')
-//TODO: // function to generate SVG
+
+//TODO: // ---------------------------    Function to generate SVG    --------------------------- //
 function generateSVGLogo(text, textColor, shapeType, shapeColor) {
   //1. create an array promp the user for shape, text, shape color and text color
   //2. create the SVG
@@ -32,7 +33,7 @@ function generateSVGLogo(text, textColor, shapeType, shapeColor) {
     throw new Error("Invalid shape type");
   }
 
-  // set the shape's color
+  //TODO:// ---------------------------    Set the shape color   --------------------------- //
   shape.setColor(shapeColor);
 
   let svgContent = `<svg width="300" height="200" version="1.1" xmlns="http://www.w3.org/2000/svg">${shape.render()}<text x="150" y="125" text-anchor="middle" font-size="65" fill="${textColor}">${text}</text></svg>`;
@@ -42,13 +43,11 @@ function generateSVGLogo(text, textColor, shapeType, shapeColor) {
   `<svg <rect width="150" height="150"/><text x="150" y="125" text-anchor="middle" font-size="65" fill="${textColor}">${text}</text></svg>`;
 
   // 2.3 gen svg text
-  // draw.text(text).move(75, 100).font({ size: 30, fill: textColor });
-  // draw.add(shape.render());
   // 2.9 return the SVG content as a string
   // const svgContent = draw.svg();
   return svgContent;
 }
-
+//TODO:// ---------------------------    PromptUser function   --------------------------- //
 function promptUser() {
   inquirer
     .prompt([
@@ -82,8 +81,8 @@ function promptUser() {
         answers.shape,
         answers.shapeColor
       );
-
-      fs.writeFile("examples/hw.svg", svgContent, (err) => {
+      //TODO:// ---------------------------    Write to file   --------------------------- //
+      fs.writeFile("examples/logo.svg", svgContent, (err) => {
         if (err) {
           console.error("Error writing to file:", err);
         } else {
@@ -96,28 +95,3 @@ function promptUser() {
     });
 }
 promptUser();
-
-// function createText(fillColor, text) {
-//   // return string with fullColor and text ${}
-//   const newShape = new Triangle()
-//   newShape.render()
-// }
-
-// const data =
-// `<svg width="200" height="250" version="1.1" xmlns="http://www.w3.org/2000/svg">
-
-//   <rect x="10" y="10" width="30" height="30" stroke="black" fill="transparent" stroke-width="5"/>
-//   <rect x="60" y="10" rx="10" ry="10" width="30" height="30" stroke="black" fill="transparent" stroke-width="5"/>
-
-//   <circle cx="25" cy="75" r="20" stroke="red" fill="transparent" stroke-width="5"/>
-
-//   <polygon points="50 160 55 180 70 180 60 190 65 205 50 195 35 205 40 190 30 180 45 180"
-//       stroke="green" fill="transparent" stroke-width="5"/>
-
-// </svg>`
-
-// fs.writeToFile("examples/hw.svg", data, err => {
-//   if(err) {
-//     console.log(error)
-//   }
-// })
