@@ -24,7 +24,7 @@ npm i
 
 Please, run node index.js to generate the SVG file.
 
-[Logo-Generator](https://drive.google.com/file/d/1ce8Zfu9sCiq1jbqM2uYAsUeCRsI8qK_h/view?usp=sharing/)
+[Logo-Generator-Video](https://drive.google.com/file/d/1ce8Zfu9sCiq1jbqM2uYAsUeCRsI8qK_h/view?usp=sharing/)
 
 ## Tests
 
